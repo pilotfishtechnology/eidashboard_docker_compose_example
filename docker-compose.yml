@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+   db:
+     image: pilotfishtechnology/postgres:${EIDASHBOARD_VERSION}
+     restart: always
+     container_name: postgres
+     environment:
+       - POSTGRES_USER=${PSQL_USERNAME}
+       - POSTGRES_PASSWORD=${PSQL_PASSWORD}
+       - POSTGRES_DB=txnlogdb
+     volumes: 
+       - ./postgres-data:/var/lib/postgresql/data
+
+   eid:
+     depends_on:
+       - db
+     image: pilotfishtechnology/eidashboard:${EIDASHBOARD_VERSION}
+     restart: always
+     container_name: eidashboard
+     volumes: 
+       - ./pflicense.key:/opt/pilotfish/license/pflicense.key
+     environment:
+      - PFISH_dashboard_txlogapi_url=http://localhost:8080/eip/rest
+      - PFISH_DASH_CONF_com_pilotfish_eip_txlog_dbUrl=jdbc:postgresql://db:5432/txnlogdb
+      - PFISH_DASH_CONF_com_pilotfish_eip_txlog_dbUser=${PSQL_USERNAME}
+      - PFISH_DASH_CONF_com_pilotfish_eip_txlog_dbPass=${PSQL_PASSWORD}
+      - PFISH_EIP_CONF_com_pilotfish_eip_user=${EIPLATFORM_USERNAME}
+      - PFISH_EIP_CONF_com_pilotfish_eip_password=${EIPLATFORM_PASSWORD}       
+     ports:
+      - "${EIDASHBOARD_PORT}:8080"
+
