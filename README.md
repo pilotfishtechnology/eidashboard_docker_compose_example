@@ -15,7 +15,7 @@ PilotFish’s eiDashboard UI delivers multi-dimensional operational insight for 
 
 ![logo](https://www.pilotfishtechnology.com/wp-content/uploads/2015/03/pilotfish-logo.png)
 
-## Using `docker-compose`
+## Using `docker-compose` (Recommended)
 
 1. Install Docker
 
@@ -32,7 +32,7 @@ PilotFish’s eiDashboard UI delivers multi-dimensional operational insight for 
 
 3. Log in to the [Customer Portal](https://customerportal.pilotfishtechnology.com/portal/login.html) and download your latest license file.
 
-4. Copy in your license file (`pflicense.key`).
+4. Copy in your license file (`/license/pflicense.key`).
 
 5. Bring up your stack by running
 

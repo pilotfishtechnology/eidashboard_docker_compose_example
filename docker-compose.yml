@@ -10,7 +10,7 @@ services:
        - POSTGRES_PASSWORD=${PSQL_PASSWORD}
        - POSTGRES_DB=txnlogdb
      volumes: 
-       - ./postgres-data:/var/lib/postgresql/data
+       - ./db-data:/var/lib/postgresql/data
 
    eid:
      depends_on:
@@ -19,7 +19,9 @@ services:
      restart: always
      container_name: eidashboard
      volumes: 
-       - ./pflicense.key:/opt/pilotfish/license/pflicense.key
+       - ./license/:/opt/pilotfish/license/
+       - ./config/:/opt/pilotfish/config/
+       - ./logs/:/opt/pilotfish/logs/ 
      environment:
       - PFISH_dashboard_txlogapi_url=http://localhost:8080/eip/rest
       - PFISH_DASH_CONF_com_pilotfish_eip_txlog_dbUrl=jdbc:postgresql://db:5432/txnlogdb
@@ -29,4 +31,5 @@ services:
       - PFISH_EIP_CONF_com_pilotfish_eip_password=${EIPLATFORM_PASSWORD}       
      ports:
       - "${EIDASHBOARD_PORT}:8080"
+
 
