@@ -28,7 +28,9 @@ services:
       - PFISH_DASH_CONF_com_pilotfish_eip_txlog_dbUser=${PSQL_USERNAME}
       - PFISH_DASH_CONF_com_pilotfish_eip_txlog_dbPass=${PSQL_PASSWORD}
       - PFISH_EIP_CONF_com_pilotfish_eip_user=${EIPLATFORM_USERNAME}
-      - PFISH_EIP_CONF_com_pilotfish_eip_password=${EIPLATFORM_PASSWORD}       
+      - PFISH_EIP_CONF_com_pilotfish_eip_password=${EIPLATFORM_PASSWORD}
+      - PFISH_EIP_CONF_com_pilotfish_eip_txlog_enable=true
+      - PFISH_EIP_CONF_com_pilotfish_eip_skipEmptyStages=false
      ports:
       - "${EIDASHBOARD_PORT}:8080"
 
