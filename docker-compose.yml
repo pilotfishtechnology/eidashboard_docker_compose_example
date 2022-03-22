@@ -23,14 +23,34 @@ services:
        - ./config/:/opt/pilotfish/config/
        - ./logs/:/opt/pilotfish/logs/ 
      environment:
+# Memory allocation pool for a Java virtual machine
+      - JAVA_OPTS=-Xms1g -Xmx3g
+# Set eiDashboard connection details
       - PFISH_dashboard_txlogapi_url=http://localhost:8080/eip/rest
       - PFISH_DASH_CONF_com_pilotfish_eip_txlog_dbUrl=jdbc:postgresql://db:5432/txnlogdb
       - PFISH_DASH_CONF_com_pilotfish_eip_txlog_dbUser=${PSQL_USERNAME}
       - PFISH_DASH_CONF_com_pilotfish_eip_txlog_dbPass=${PSQL_PASSWORD}
+# Set eiPlatform credentials for the eiDashboard
       - PFISH_EIP_CONF_com_pilotfish_eip_user=${EIPLATFORM_USERNAME}
       - PFISH_EIP_CONF_com_pilotfish_eip_password=${EIPLATFORM_PASSWORD}
-      - PFISH_EIP_CONF_com_pilotfish_eip_txlog_enable=true
-      - PFISH_EIP_CONF_com_pilotfish_eip_skipEmptyStages=false
+# Performance enhancement that skips execution of any stages that do not alter data
+#      - PFISH_EIP_CONF_com_pilotfish_eip_skipEmptyStages=false
+# Specifies if a thread pool should be created per-Route, or per-Stage. Per-Stage is the default setting
+#      - PFISH_EIP_CONF_com_pilotfish_eip_ntm_poolPerRoute=true
+# Thread pool configuration settings for per-Stage thread pools. Only applies if PoolPerRoute is false.
+#      - PFISH_EIP_CONF_com_pilotfish_eip_ntm_maxThreadCount=8
+#      - PFISH_EIP_CONF_com_pilotfish_eip_ntm_baseThreadCount=2
+#      - PFISH_EIP_CONF_com_pilotfish_eip_ntm_maxThreadCount=8
+#      - PFISH_EIP_CONF_com_pilotfish_eip_ntm_stage_idleTimeout=60
+#      - PFISH_EIP_CONF_com_pilotfish_eip_ntm_stage_stageQueueSize=-1
+#      - PFISH_EIP_CONF_com_pilotfish_eip_ntm_allowCoreTimeout=false
+# Thread pool configuration settings for per-Route thread pools. Only applies if PoolPerRoute is true.
+#      - PFISH_EIP_CONF_com_pilotfish_eip_transact_baseThreadCount=4
+#      - PFISH_EIP_CONF_com_pilotfish_eip_transact_maxThreadCount=8
+#      - PFISH_EIP_CONF_com_pilotfish_eip_transact_queueSize=-1
+#      - PFISH_EIP_CONF_com_pilotfish_eip_transact_idleTimeout=60
+# PilotFish Transaction Cache Type
+#      - PFISH_EIP_CONF_com_pilotfish_eip_transact_defaultCache=memory
      ports:
       - "${EIDASHBOARD_PORT}:8080"
 
