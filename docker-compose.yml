@@ -18,11 +18,15 @@ services:
      image: pilotfishtechnology/eidashboard:${EIDASHBOARD_VERSION}
      restart: always
      container_name: eidashboard
+
      volumes: 
-       - ./license/:/opt/pilotfish/license/
        - ./config/:/opt/pilotfish/config/
-       - ./logs/:/opt/pilotfish/logs/ 
+# Possible extra volume mappings for debugging purposes
+#       - ./logs/:/opt/pilotfish/logs/ 
+#       - ./license/:/opt/pilotfish/license/
      environment:
+# Pilotfish License
+      - PFISH_EIP_CONF_com_pilotfish_eip_license_base64=
 # Memory allocation pool for a Java virtual machine
       - JAVA_OPTS=-Xms1g -Xmx3g
 # Set eiDashboard connection details
@@ -51,8 +55,7 @@ services:
 #      - PFISH_EIP_CONF_com_pilotfish_eip_transact_idleTimeout=60
 # PilotFish Transaction Cache Type
 #      - PFISH_EIP_CONF_com_pilotfish_eip_transact_defaultCache=memory
-# Pilotfish License
-#      - PFISH_EIP_CONF_com_pilotfish_eip_license_base64=
+
      ports:
       - "${EIDASHBOARD_PORT}:8080"
 

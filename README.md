@@ -32,7 +32,7 @@ PilotFish’s eiDashboard UI delivers multi-dimensional operational insight for 
 
 3. Log in to the [Customer Portal](https://customerportal.pilotfishtechnology.com/portal/login.html) and download your latest license file.
 
-4. Copy in your license file (`/license/pflicense.key`).
+4. Convert your license file to a base64 encoded string (`echo "$(cat pflicense.key | base64)"`) and copy the base64 encoded string into the `PFISH_EIP_CONF_com_pilotfish_eip_license_base64` environment variable located in the docker-compose.yml
 
 5. Bring up your stack by running
 
