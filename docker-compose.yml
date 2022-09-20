@@ -29,6 +29,8 @@ services:
       - PFISH_EIP_CONF_com_pilotfish_eip_license_base64=
 # Memory allocation pool for a Java virtual machine
       - JAVA_OPTS=-Xms1g -Xmx3g
+# Set Time Zone
+#       - TIMEZONE=America/New_York
 # Set eiDashboard connection details
       - PFISH_dashboard_txlogapi_url=http://localhost:8080/eip/rest
       - PFISH_DASH_CONF_com_pilotfish_eip_txlog_dbUrl=jdbc:postgresql://db:5432/txnlogdb
