@@ -57,7 +57,11 @@ services:
 #      - PFISH_EIP_CONF_com_pilotfish_eip_transact_idleTimeout=60
 # PilotFish Transaction Cache Type
 #      - PFISH_EIP_CONF_com_pilotfish_eip_transact_defaultCache=memory
-
+# Docker Health Check 
+#   The /healthcheck.sh script triggers a curl to confirm if the container is up and running. 
+#   If there is any failure, the container will be terminated and automatically be restarted by the ‘restart: on-failure’ tag within docker-compose.
+#   This is enabled by default
+#       - ENABLE_HEALTHCHECK=1
      ports:
       - "${EIDASHBOARD_PORT}:8080"
 
